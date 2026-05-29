@@ -15,7 +15,7 @@
   ║  Usuário: admin   |   Senha: sankhya2025                        ║
   ║  (altere as constantes ADM_USER e ADM_PASS no <script>)         ║
   ║                                                                  ║
-  ║  IMPORTANTE: os dados são salvos no localStorage do navegador.  ║
+  ║  IMPORTANTE: os dados são salvos no Supabase (banco na nuvem).   ║
   ║  Para compartilhar resultados entre dispositivos diferentes,    ║
   ║  é necessário integrar um banco externo (Supabase, etc).        ║
   ╚══════════════════════════════════════════════════════════════════╝
@@ -635,15 +635,75 @@ tbody td.c{text-align:center;}
 </div>
 
 <script>
-// ═══ STORAGE KEY ═══
-const STORE_KEY = 'sankhya_rh_evaluations';
+// ═══════════════════════════════════════════════════════
+// SUPABASE — cole suas credenciais nas duas linhas abaixo
+// ═══════════════════════════════════════════════════════
+const SUPABASE_URL  = 'https://yejkmjedtiirgvldxtna.supabase.co';
+const SUPABASE_KEY  = 'sb_secret_75_gHMEFAjgPFRdAPlj03A_TuZg33B3';
+// ═══════════════════════════════════════════════════════
+
 const ADM_USER = 'admin';
 const ADM_PASS = 'sankhya2025';
 
-function loadData() {
-  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch { return []; }
+// ── helpers ──
+const sbHeaders = {
+  'Content-Type':  'application/json',
+  'apikey':        SUPABASE_KEY,
+  'Authorization': 'Bearer ' + SUPABASE_KEY,
+  'Prefer':        'return=representation'
+};
+
+async function loadData() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/evaluations?order=created_at.asc`, {
+      headers: { ...sbHeaders, 'Prefer': '' }
+    });
+    if (!res.ok) throw new Error(await res.text());
+    const rows = await res.json();
+    // normalise: modulos e bloco4 chegam como objetos JSON do postgres
+    return rows.map(r => ({
+      ...r,
+      modulos: Array.isArray(r.modulos) ? r.modulos : Object.values(r.modulos || {}),
+      bloco4:  r.bloco4  || {}
+    }));
+  } catch(e) {
+    console.error('loadData:', e);
+    showToast('Erro ao carregar dados. Verifique as credenciais.', 'red');
+    return [];
+  }
 }
-function saveData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+
+async function saveData(entry) {
+  // serialise arrays/objects for jsonb columns
+  const payload = {
+    source:       entry.source,
+    specialist:   entry.specialist,
+    evaluator:    entry.evaluator,
+    date:         entry.date,
+    modulos:      JSON.stringify(entry.modulos  || []),
+    bloco4:       JSON.stringify(entry.bloco4   || {}),
+    modsavg:      entry.modsavg  ?? null,
+    b4avg:        entry.b4avg    ?? null,
+    strengths:    entry.strengths    || null,
+    improvements: entry.improvements || null,
+    pdf_name:     entry.pdf_name     || null
+  };
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/evaluations`, {
+    method:  'POST',
+    headers: sbHeaders,
+    body:    JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function deleteData(id) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/evaluations?id=eq.${id}`, {
+    method:  'DELETE',
+    headers: { ...sbHeaders, 'Prefer': '' }
+  });
+  if (!res.ok) throw new Error(await res.text());
+}
 
 // ═══ NAVIGATION ═══
 let currentEvaluator = '';
@@ -682,7 +742,7 @@ function doAdmLogin() {
   if(u===ADM_USER && p===ADM_PASS) {
     document.getElementById('admLogin').style.display='none';
     showScreen('admScreen');
-    renderAdm();
+    renderAdm(); // async — starts loading immediately
   } else {
     document.getElementById('admErr').style.display='block';
   }
@@ -771,31 +831,39 @@ function clearSC(){
 }
 
 // ═══ SAVE EVALUATION ═══
-function saveEvaluation(){
+async function saveEvaluation(){
   const mods=[0,1,2,3,4,5,6,7,8].map(i=>calcModAvg(i));
   const m=avgVals(mods);
   const b4=calcBloco4();
   const fs=calcFinal(m,b4);
   if(!fs){ showToast('Preencha ao menos alguns critérios antes de enviar.','red'); return; }
+
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
   const entry={
-    id: Date.now(),
     source:'evaluator',
     specialist: currentSpecialist,
-    evaluator: currentEvaluator,
-    date: document.getElementById('sc-date').value,
-    modulos: mods,
-    bloco4:{trans:getStars('trans'),integ:getStars('integ'),timing:getStars('timing')},
-    strengths: document.getElementById('sc-strengths').value.trim(),
+    evaluator:  currentEvaluator,
+    date:       document.getElementById('sc-date').value,
+    modulos:    mods,
+    bloco4:     {trans:getStars('trans'),integ:getStars('integ'),timing:getStars('timing')},
+    strengths:  document.getElementById('sc-strengths').value.trim(),
     improvements: document.getElementById('sc-improvements').value.trim()
   };
-  const data=loadData(); data.push(entry); saveData(data);
-  // Show next-eval overlay
-  document.getElementById('nextSpecialist').value = '';
-  document.getElementById('nextErr').style.display = 'none';
-  const ov = document.getElementById('nextOverlay');
-  ov.style.display = 'flex';
-  // Scroll to top so overlay is fully visible
-  window.scrollTo({top:0, behavior:'smooth'});
+  try {
+    await saveData(entry);
+    document.getElementById('nextSpecialist').value = '';
+    document.getElementById('nextErr').style.display = 'none';
+    document.getElementById('nextOverlay').style.display = 'flex';
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch(e) {
+    console.error(e);
+    showToast('Erro ao salvar. Verifique sua conexão.','red');
+    btn.disabled = false;
+    btn.textContent = 'Enviar Avaliação →';
+  }
 }
 
 function startNextEval(){
@@ -806,6 +874,7 @@ function startNextEval(){
   currentSpecialist = sel;
   document.getElementById('sc-specialist').value = sel;
   resetScorecard();
+  document.getElementById('saveBtn').textContent = 'Enviar Avaliação →';
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -854,8 +923,12 @@ function setFilter(f,btn){
   renderAdm();
 }
 
-function renderAdm(){
-  const all=loadData();
+async function renderAdm(){
+  // show loading indicator
+  document.getElementById('kpiStrip').innerHTML=`<div class="kpi" style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:13px;padding:24px;">Carregando dados...</div>`;
+
+  const all = await loadData();
+
   // rebuild filter buttons
   const specs=[...new Set(all.map(d=>d.specialist))];
   const fltDiv=document.getElementById('flt-btns');
@@ -919,12 +992,16 @@ function togDet(i){
   if(r) r.classList.toggle('open');
 }
 
-function delEntry(id){
+async function delEntry(id){
   if(!confirm('Excluir esta avaliação? Esta ação não pode ser desfeita.')) return;
-  const data=loadData().filter(d=>d.id!==id);
-  saveData(data);
-  renderAdm();
-  showToast('Avaliação excluída.','red');
+  try {
+    await deleteData(id);
+    renderAdm();
+    showToast('Avaliação excluída.','red');
+  } catch(e) {
+    console.error(e);
+    showToast('Erro ao excluir. Tente novamente.','red');
+  }
 }
 
 function renderAvgTable(data){
@@ -982,40 +1059,50 @@ function closeModals(){
 
 function gv(id){ const v=parseFloat(document.getElementById(id)?.value); return isNaN(v)?null:Math.min(5,Math.max(1,v)); }
 
-function saveManual(){
+async function saveManual(){
   const sp=document.getElementById('mf-sp').value.trim();
   const ev=document.getElementById('mf-ev').value.trim();
   if(!sp||!ev){alert('Informe o especialista e o avaliador.');return;}
   const entry={
-    id:Date.now(), source:'manual', specialist:sp, evaluator:ev, date:new Date().toISOString().split('T')[0],
+    source:'manual', specialist:sp, evaluator:ev, date:new Date().toISOString().split('T')[0],
     modulos:[0,1,2,3,4,5,6,7,8].map(i=>gv(`mf-m${i}`)),
     bloco4:{trans:gv('mf-trans'),integ:gv('mf-integ'),timing:gv('mf-timing')},
     strengths:document.getElementById('mf-str').value.trim(),
     improvements:document.getElementById('mf-imp').value.trim()
   };
-  const data=loadData(); data.push(entry); saveData(data);
-  closeModals();
-  renderAdm();
-  document.querySelectorAll('.modal-box input,.modal-box textarea,#manModal input,#manModal textarea').forEach(el=>el.value='');
-  showToast('Resultado manual adicionado!','green');
+  try {
+    await saveData(entry);
+    closeModals();
+    renderAdm();
+    document.querySelectorAll('#manModal input,#manModal textarea').forEach(el=>el.value='');
+    showToast('Resultado manual adicionado!','green');
+  } catch(e) {
+    console.error(e);
+    showToast('Erro ao salvar. Tente novamente.','red');
+  }
 }
 
-function savePdf(){
+async function savePdf(){
   const sp=document.getElementById('pdf-sp').value.trim();
   const ev=document.getElementById('pdf-ev').value.trim();
   if(!sp||!ev){alert('Informe o especialista e o avaliador.');return;}
   const entry={
-    id:Date.now(), source:'pdf', specialist:sp, evaluator:ev, date:new Date().toISOString().split('T')[0],
+    source:'pdf', specialist:sp, evaluator:ev, date:new Date().toISOString().split('T')[0],
     modsavg:gv('pdf-mods'), b4avg:gv('pdf-b4'),
-    modulos:[], bloco1:{}, bloco2:{}, bloco4:{},
+    modulos:[], bloco4:{},
     strengths:document.getElementById('pdf-str').value.trim(),
     improvements:document.getElementById('pdf-imp').value.trim(),
-    pdfName:document.getElementById('pdfName').textContent
+    pdf_name:document.getElementById('pdfName').textContent
   };
-  const data=loadData(); data.push(entry); saveData(data);
-  closeModals();
-  renderAdm();
-  showToast('PDF registrado no dashboard!','green');
+  try {
+    await saveData(entry);
+    closeModals();
+    renderAdm();
+    showToast('PDF registrado no dashboard!','green');
+  } catch(e) {
+    console.error(e);
+    showToast('Erro ao salvar PDF. Tente novamente.','red');
+  }
 }
 
 function handlePdfSelect(e){
