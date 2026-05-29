@@ -142,7 +142,8 @@ body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--body);m
 .mod-body.open{display:block;}
 .mod-crit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
 .mc{background:#fff;border:1.5px solid var(--bdr);border-left:3px solid var(--ga);border-radius:6px;padding:11px 13px;}
-.mc-name{font-size:12px;font-weight:700;color:var(--deep-navy);margin-bottom:7px;}
+.mc-name{font-size:12px;font-weight:700;color:var(--deep-navy);margin-bottom:5px;}
+.mc-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:7px;}
 
 /* summary */
 .sum-box{background:var(--deep-navy);border-radius:12px;padding:26px 30px;margin-top:28px;position:relative;overflow:hidden;}
@@ -428,38 +429,68 @@ tbody td.c{text-align:center;}
       <span style="font-size:11px;color:var(--muted);margin-left:auto;font-style:italic;">Clique nos quadrados para pontuar</span>
     </div>
 
-    <!-- BLOCO 1 -->
-    <div class="sec-hdr"><span class="sec-badge">Bloco 1</span><span class="sec-title">Presença Física & Comunicação Corporal</span><div class="sec-line"></div></div>
-    <div class="crit-grid">
-      <div class="crit-card"><div class="crit-hdr"><div><div class="crit-name">Postura & Movimentação</div><div class="crit-desc">Presença no espaço, gestos assertivos, não estático</div></div><span class="w-badge">×1</span></div><div class="stars" data-id="postura"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
-      <div class="crit-card"><div class="crit-hdr"><div><div class="crit-name">Contato Visual</div><div class="crit-desc">Engaja o cliente, distribui o olhar, não lê os slides</div></div><span class="w-badge">×1</span></div><div class="stars" data-id="contato"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
-      <div class="crit-card"><div class="crit-hdr"><div><div class="crit-name">Energia & Entusiasmo</div><div class="crit-desc">Transmite convicção, mantém engajamento da audiência</div></div><span class="w-badge">×1</span></div><div class="stars" data-id="energia"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
-    </div>
-
-    <!-- BLOCO 2 -->
-    <div class="sec-hdr"><span class="sec-badge">Bloco 2</span><span class="sec-title">Habilidades de Fala & Persuasão</span><div class="sec-line"></div></div>
-    <div class="crit-grid">
-      <div class="crit-card hl"><div class="crit-hdr"><div><div class="crit-name">Clareza & Fluidez</div><div class="crit-desc">Dicção, ritmo, evita vícios de linguagem</div></div><span class="w-badge">×1.5</span></div><div class="stars" data-id="clareza"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
-      <div class="crit-card hl"><div class="crit-hdr"><div><div class="crit-name">Storytelling & Dor do Cliente</div><div class="crit-desc">Começa pelo problema, contextualiza antes de solucionar</div></div><span class="w-badge">×1.5</span></div><div class="stars" data-id="story"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
-      <div class="crit-card hl"><div class="crit-hdr"><div><div class="crit-name">Power Questions</div><div class="crit-desc">Usa as perguntas certas para diagnosticar e engajar</div></div><span class="w-badge">×1.5</span></div><div class="stars" data-id="pq"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
-    </div>
-
-    <!-- BLOCO 3 -->
-    <div class="sec-hdr"><span class="sec-badge">Bloco 3</span><span class="sec-title">Domínio dos Módulos — Jornada do Colaborador</span><div class="sec-line"></div></div>
+    <!-- MÓDULOS DA JORNADA -->
+    <div class="sec-hdr"><span class="sec-badge">Avaliação</span><span class="sec-title">Domínio dos Módulos — Jornada do Colaborador</span><div class="sec-line"></div></div>
     <div class="mods-wrap">
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">A</div><div class="mod-info"><div class="mod-name">Abertura — Credenciais & Tese Sankhya RH</div><div class="mod-time">⏱ 15 min · Institucional</div></div><div class="mod-sp" id="msp-0">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Apresenta a Tese Sankhya com segurança</div><div class="stars" data-id="m0a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Explica o conceito de HCM integrado</div><div class="stars" data-id="m0b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Apresenta a Jornada do Colaborador encadeada</div><div class="stars" data-id="m0c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">1</div><div class="mod-info"><div class="mod-name">Recrutamento & Seleção</div><div class="mod-time">⏱ 7 min · Mindsight</div></div><div class="mod-sp" id="msp-1">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Domínio técnico do ATS (Mindsight)</div><div class="stars" data-id="m1a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Apresentou domínio na apresentação do Mindmatch</div><div class="stars" data-id="m1b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Faz transição para Admissão Digital</div><div class="stars" data-id="m1c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">2</div><div class="mod-info"><div class="mod-name">Admissão Digital</div><div class="mod-time">⏱ 3 min · Vixting</div></div><div class="mod-sp" id="msp-2">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Comunica o fluxo automatizado pós-aprovação</div><div class="stars" data-id="m2a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Destaca experiência do candidato e redução de retrabalho</div><div class="stars" data-id="m2b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Conecta dados da admissão ao SST</div><div class="stars" data-id="m2c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">3</div><div class="mod-info"><div class="mod-name">SST & Saúde Ocupacional</div><div class="mod-time">⏱ 7 min · Vixting</div></div><div class="mod-sp" id="msp-3">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Apresenta controle de ASOs, PPP, PCMSO, PGR</div><div class="stars" data-id="m3a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Conecta conformidade legal à dor do cliente</div><div class="stars" data-id="m3b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Menciona integração com eSocial e folha</div><div class="stars" data-id="m3c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">4</div><div class="mod-info"><div class="mod-name">Folha de Pagamento</div><div class="mod-time">⏱ 5 min · Pessoas+</div></div><div class="mod-sp" id="msp-4">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Posiciona a Folha como "coração das integrações"</div><div class="stars" data-id="m4a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Apresenta BIA (IA) e Painel de Liderança</div><div class="stars" data-id="m4b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Destaca segurança jurídica e atualização legislativa</div><div class="stars" data-id="m4c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">5</div><div class="mod-info"><div class="mod-name">Gestão de Ponto</div><div class="mod-time">⏱ 7 min · Pontotel</div></div><div class="mod-sp" id="msp-5">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Menciona Portaria 671 e certificações</div><div class="stars" data-id="m5a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Apresenta flexibilidade de coleta</div><div class="stars" data-id="m5b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Conecta fechamento de ponto à folha</div><div class="stars" data-id="m5c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">6</div><div class="mod-info"><div class="mod-name">Benefícios</div><div class="mod-time">⏱ 3 min · Sankhya Benefícios</div></div><div class="mod-sp" id="msp-6">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Apresenta cartão Mastercard multi-benefícios</div><div class="stars" data-id="m6a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Conecta benefícios ao eSocial e folha</div><div class="stars" data-id="m6b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Usa flexibilidade como argumento de retenção</div><div class="stars" data-id="m6c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">7</div><div class="mod-info"><div class="mod-name">LMS / Educação Corporativa</div><div class="mod-time">⏱ 3 min · Sankhya LMS</div></div><div class="mod-sp" id="msp-7">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Apresenta trilha automática de onboarding</div><div class="stars" data-id="m7a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Conecta LMS ao módulo de Gestão de Talentos</div><div class="stars" data-id="m7b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Diferencial vs. repositório de vídeos comum</div><div class="stars" data-id="m7c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
-      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">8</div><div class="mod-info"><div class="mod-name">Gestão de Talentos</div><div class="mod-time">⏱ 10 min · Mindsight</div></div><div class="mod-sp" id="msp-8">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid"><div class="mc"><div class="mc-name">Apresenta OKRs, Avaliação 360° e PDI conectados</div><div class="stars" data-id="m8a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Apresenta People Hub, People Card e Fórum de Gente</div><div class="stars" data-id="m8b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div><div class="mc"><div class="mc-name">Posiciona a Synapses (IA) como diferencial</div><div class="stars" data-id="m8c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div></div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">A</div><div class="mod-info"><div class="mod-name">Abertura — Institucional & Tese Sankhya RH</div><div class="mod-time">⏱ 15 min · Institucional</div></div><div class="mod-sp" id="msp-0">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Conexão com a dor do cliente</div><div class="mc-desc">Consegue contextualizar os desafios atuais do RH/DP (sistemas desconectados, retrabalho, baixa visão estratégica) e gerar identificação com o cenário apresentado.</div><div class="stars" data-id="m0a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Construção de autoridade e ecossistema Sankhya</div><div class="mc-desc">Apresenta a tese da Sankhya RH de forma clara, reforçando diferenciais como ecossistema integrado, empresas especialistas e profundidade funcional.</div><div class="stars" data-id="m0b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Condução consultiva da conversa</div><div class="mc-desc">Utiliza perguntas estratégicas, cria curiosidade para a jornada e conduz a apresentação de forma fluida e executiva.</div><div class="stars" data-id="m0c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">1</div><div class="mod-info"><div class="mod-name">Recrutamento & Seleção</div><div class="mod-time">⏱ 7 min · Mindsight</div></div><div class="mod-sp" id="msp-1">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Exploração das dores do processo seletivo</div><div class="mc-desc">Investiga desafios como turnover, baixa assertividade, demora na contratação, falta de fit cultural e excesso de processos manuais.</div><div class="stars" data-id="m1a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Apresentação do diferencial estratégico da solução</div><div class="mc-desc">Demonstra claramente ATS, assessments, IA, Big Five, fit cultural, hunting e automações como diferenciais competitivos.</div><div class="stars" data-id="m1b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Conexão entre tecnologia e resultado de negócio</div><div class="mc-desc">Relaciona funcionalidades com ganhos práticos: redução de turnover, assertividade na contratação, ganho de produtividade e experiência do candidato.</div><div class="stars" data-id="m1c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">2</div><div class="mod-info"><div class="mod-name">Admissão Digital</div><div class="mod-time">⏱ 3 min · Vixting</div></div><div class="mod-sp" id="msp-2">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Clareza na demonstração da jornada admissional</div><div class="mc-desc">Explica de forma objetiva o fluxo do colaborador desde o recebimento do link até assinatura eletrônica e integração com folha/SST.</div><div class="stars" data-id="m2a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Ênfase em automação e compliance</div><div class="mc-desc">Destaca OCR, validação automática, LGPD, assinatura ICP e integração com exames admissionais e eSocial.</div><div class="stars" data-id="m2b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Foco em eficiência operacional</div><div class="mc-desc">Conecta a solução à redução de papelada, agilidade de admissão, acompanhamento em tempo real e menor risco operacional.</div><div class="stars" data-id="m2c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">3</div><div class="mod-info"><div class="mod-name">SST & Saúde Ocupacional</div><div class="mod-time">⏱ 7 min · Vixting</div></div><div class="mod-sp" id="msp-3">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Capacidade de explorar riscos e fragilidades atuais</div><div class="mc-desc">Investiga problemas com ASOs, exames periódicos, gestão de EPI, NR1 e controles manuais.</div><div class="stars" data-id="m3a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Demonstração do valor estratégico da automação</div><div class="mc-desc">Explica como a plataforma automatiza exames, laudos, integração com clínicas e gestão preventiva de SST.</div><div class="stars" data-id="m3b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Ênfase em segurança jurídica e previsibilidade</div><div class="mc-desc">Relaciona a solução à conformidade legal, rastreabilidade, redução de passivos e previsibilidade de custos.</div><div class="stars" data-id="m3c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">4</div><div class="mod-info"><div class="mod-name">Folha de Pagamento</div><div class="mod-time">⏱ 5 min · Pessoas+</div></div><div class="mod-sp" id="msp-4">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Abordagem consultiva sobre ineficiências atuais</div><div class="mc-desc">Explora dores ligadas a eSocial, dependência de terceiros, lentidão operacional e falta de visão estratégica dos dados.</div><div class="stars" data-id="m4a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Domínio dos diferenciais da plataforma</div><div class="mc-desc">Demonstra automações, parametrizações, workflows, portal do colaborador, dashboards e integração com o ecossistema.</div><div class="stars" data-id="m4b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Posicionamento estratégico da folha</div><div class="mc-desc">Mostra a folha como ferramenta de gestão e inteligência, não apenas operacional, conectando dados para tomada de decisão.</div><div class="stars" data-id="m4c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">5</div><div class="mod-info"><div class="mod-name">Gestão de Ponto</div><div class="mod-time">⏱ 7 min · Pontotel</div></div><div class="mod-sp" id="msp-5">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Exploração das dores operacionais e jurídicas</div><div class="mc-desc">Investiga excesso de horas extras, retrabalho no fechamento, uso de REP-C e riscos trabalhistas.</div><div class="stars" data-id="m5a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Apresentação estruturada dos pilares do ponto</div><div class="mc-desc">Explica captura, tratamento e gestão dos dados com clareza, incluindo reconhecimento facial, offline, workflows e dashboards.</div><div class="stars" data-id="m5b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Demonstração de impacto financeiro e produtividade</div><div class="mc-desc">Relaciona a solução à redução de horas extras, descentralização operacional, conformidade e ganho de gestão.</div><div class="stars" data-id="m5c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">6</div><div class="mod-info"><div class="mod-name">Benefícios Flexíveis</div><div class="mod-time">⏱ 3 min · Sankhya Benefícios</div></div><div class="mod-sp" id="msp-6">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Diagnóstico do cenário atual de benefícios</div><div class="mc-desc">Investiga problemas com múltiplos fornecedores, falhas operacionais, gestão manual e experiência do colaborador.</div><div class="stars" data-id="m6a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Clareza no diferencial do cartão e integração</div><div class="mc-desc">Demonstra funcionamento do cartão Mastercard, saldos flexíveis, integração nativa e gestão centralizada.</div><div class="stars" data-id="m6b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Conexão entre benefício e retenção</div><div class="mc-desc">Relaciona flexibilidade, experiência do colaborador e eficiência operacional como estratégia de engajamento e retenção.</div><div class="stars" data-id="m6c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">7</div><div class="mod-info"><div class="mod-name">Educação Corporativa</div><div class="mod-time">⏱ 3 min · Sankhya LMS</div></div><div class="mod-sp" id="msp-7">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Exploração das dores de treinamento e onboarding</div><div class="mc-desc">Investiga problemas com conhecimento disperso, baixa padronização, treinamentos presenciais e compliance.</div><div class="stars" data-id="m7a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Apresentação do LMS como plataforma estratégica</div><div class="mc-desc">Demonstra trilhas, gamificação, certificações, conteúdos multiformato e integração com gestão de talentos.</div><div class="stars" data-id="m7b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Conexão entre capacitação e performance</div><div class="mc-desc">Relaciona o LMS à produtividade, retenção, escalabilidade do conhecimento e desenvolvimento contínuo.</div><div class="stars" data-id="m7c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
+      <div class="mod-row"><div class="mod-hdr" onclick="togMod(this)"><div class="mod-num">8</div><div class="mod-info"><div class="mod-name">Gestão de Talentos</div><div class="mod-time">⏱ 10 min · Mindsight</div></div><div class="mod-sp" id="msp-8">—</div><div class="mod-tog">▾</div></div><div class="mod-body"><div class="mod-crit-grid">
+        <div class="mc"><div class="mc-name">Capacidade de provocar visão estratégica do RH</div><div class="mc-desc">Explora desafios relacionados a performance, retenção, sucessão, clima organizacional e uso disperso de dados.</div><div class="stars" data-id="m8a"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Domínio das funcionalidades estratégicas</div><div class="mc-desc">Demonstra metas, avaliações 90/180/360, calibração, PDIs, people analytics e IA aplicada à gestão de pessoas.</div><div class="stars" data-id="m8b"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+        <div class="mc"><div class="mc-name">Conexão entre dados e tomada de decisão</div><div class="mc-desc">Mostra como a solução apoia líderes na retenção, desenvolvimento, sucessão e ações preditivas de performance e turnover.</div><div class="stars" data-id="m8c"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div></div>
+      </div><div class="ntxt" style="margin-top:10px"><textarea placeholder="Obs..."></textarea></div></div></div>
+
     </div>
 
-    <!-- BLOCO 4 -->
-    <div class="sec-hdr"><span class="sec-badge">Bloco 4</span><span class="sec-title">Visão Integrada & Narrativa da Jornada</span><div class="sec-line"></div></div>
+    <!-- CONSIDERAÇÕES FINAIS -->
+    <div class="sec-hdr"><span class="sec-badge">Final</span><span class="sec-title">Visão Integrada & Narrativa da Jornada</span><div class="sec-line"></div></div>
     <div class="crit-grid">
       <div class="crit-card hl"><div class="crit-hdr"><div><div class="crit-name">Transições entre Módulos</div><div class="crit-desc">Conecta o fim de cada módulo ao início do próximo de forma natural</div></div><span class="w-badge">×2</span></div><div class="stars" data-id="trans"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
       <div class="crit-card hl"><div class="crit-hdr"><div><div class="crit-name">Narrativa de Integração Nativa</div><div class="crit-desc">Reforça o diferencial da integração entre módulos ao longo do pitch</div></div><span class="w-badge">×2</span></div><div class="stars" data-id="integ"><div class="star" data-v="1">1</div><div class="star" data-v="2">2</div><div class="star" data-v="3">3</div><div class="star" data-v="4">4</div><div class="star" data-v="5">5</div><span class="slabel">—</span></div><div class="ntxt"><textarea placeholder="Obs..."></textarea></div></div>
@@ -469,11 +500,9 @@ tbody td.c{text-align:center;}
     <!-- SUMMARY -->
     <div class="sum-box">
       <div class="sum-tag">Resumo da Avaliação</div>
-      <div class="sum-grid">
-        <div><div class="sum-lbl">Presença Física</div><div class="sum-val" id="sv-b1">—</div></div>
-        <div><div class="sum-lbl">Fala & Persuasão</div><div class="sum-val" id="sv-b2">—</div></div>
-        <div><div class="sum-lbl">Domínio Técnico</div><div class="sum-val" id="sv-mods">—</div></div>
-        <div><div class="sum-lbl">Visão Integrada</div><div class="sum-val" id="sv-b4">—</div></div>
+      <div class="sum-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div><div class="sum-lbl">Média — Módulos</div><div class="sum-val" id="sv-mods">—</div></div>
+        <div><div class="sum-lbl">Nota Final</div><div class="sum-val" id="sv-final">—</div></div>
       </div>
       <div class="sum-final-row">
         <div><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;">Nota Final Ponderada</div><div class="sum-big" id="sf-val">—</div><div class="sum-concept" id="sf-concept"></div></div>
@@ -487,10 +516,34 @@ tbody td.c{text-align:center;}
         <button class="btn btn-out" onclick="clearSC()">Limpar</button>
         <button class="btn btn-pri" id="saveBtn" onclick="saveEvaluation()">Enviar Avaliação →</button>
       </div>
-      <div class="save-ok" id="saveOk">✓ Avaliação enviada com sucesso! Os resultados já estão disponíveis no painel administrativo.</div>
     </div>
   </div>
   <div class="footer">CONFIDENCIAL E PARA USO INTERNO · Sankhya RH · Roleplay de Capacitação Comercial</div>
+</div>
+
+<!-- ═══ NEXT EVALUATION OVERLAY ═══ -->
+<div id="nextOverlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(30,43,60,0.85);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:16px;padding:40px 36px;width:420px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.35);position:relative;overflow:hidden;">
+    <div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--green),var(--gd));"></div>
+    <div style="font-size:36px;margin-bottom:12px;">✅</div>
+    <div style="font-size:17px;font-weight:800;color:var(--deep-navy);margin-bottom:6px;">Avaliação enviada!</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.5;">Os resultados foram registrados no painel administrativo.<br>Deseja avaliar outro especialista?</div>
+    <div style="text-align:left;margin-bottom:20px;">
+      <label style="display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin-bottom:6px;">Próximo especialista a avaliar</label>
+      <select id="nextSpecialist" style="width:100%;border:1.5px solid var(--bdr);border-radius:8px;padding:10px 14px;font-family:'Work Sans',sans-serif;font-size:14px;color:var(--body);outline:none;background:var(--sf);">
+        <option value="">Selecione o especialista...</option>
+        <option value="Caio Henrique">Caio Henrique</option>
+        <option value="Caio Tozzi">Caio Tozzi</option>
+        <option value="Danyel">Danyel</option>
+        <option value="Isabella">Isabella</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="backToLanding()" style="flex:1;padding:11px;border-radius:8px;border:1.5px solid var(--bdr);background:#fff;font-family:'Work Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer;color:var(--sec);">Encerrar sessão</button>
+      <button onclick="startNextEval()" style="flex:2;padding:11px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--green),var(--gd));color:#fff;font-family:'Work Sans',sans-serif;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 4px 14px rgba(0,205,94,.3);">Iniciar próxima avaliação →</button>
+    </div>
+    <div id="nextErr" style="display:none;color:var(--red);font-size:12px;margin-top:10px;">Selecione um especialista para continuar.</div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════ ADMIN DASHBOARD ═══════════════════════════════ -->
@@ -518,10 +571,10 @@ tbody td.c{text-align:center;}
     <div class="kpi-strip" id="kpiStrip"></div>
 
     <div class="adm-sec-hdr"><span class="adm-sec-badge">Visão Geral</span><span class="adm-sec-title">Nota por Especialista · Por Avaliador · Por Bloco</span><div class="adm-sec-line"></div></div>
-    <div class="tw"><table><thead><tr><th>Especialista</th><th>Avaliador</th><th>Origem</th><th class="c">Presença</th><th class="c">Fala & Persuasão</th><th class="c">Módulos</th><th class="c">Integração</th><th class="c">Nota Final</th><th class="c">Detalhe</th><th class="c">Excluir</th></tr></thead><tbody id="mainTbody"></tbody></table></div>
+    <div class="tw"><table><thead><tr><th>Especialista</th><th>Avaliador</th><th>Origem</th><th class="c">Módulos</th><th class="c">Integração</th><th class="c">Nota Final</th><th class="c">Detalhe</th><th class="c">Excluir</th></tr></thead><tbody id="mainTbody"></tbody></table></div>
 
     <div class="adm-sec-hdr"><span class="adm-sec-badge">Médias</span><span class="adm-sec-title">Nota Média por Especialista — Todos os Avaliadores</span><div class="adm-sec-line"></div></div>
-    <div class="tw"><table><thead><tr><th>Especialista</th><th class="c">Avaliações</th><th class="c">Presença</th><th class="c">Fala & Persuasão</th><th class="c">Módulos</th><th class="c">Integração</th><th class="c">Nota Média Final</th><th class="c">Status</th></tr></thead><tbody id="avgTbody"></tbody></table></div>
+    <div class="tw"><table><thead><tr><th>Especialista</th><th class="c">Avaliações</th><th class="c">Módulos</th><th class="c">Integração</th><th class="c">Nota Média Final</th><th class="c">Status</th></tr></thead><tbody id="avgTbody"></tbody></table></div>
 
     <div class="adm-sec-hdr"><span class="adm-sec-badge">Heatmap</span><span class="adm-sec-title">Média por Módulo da Jornada — Por Especialista</span><div class="adm-sec-line"></div></div>
     <div class="hm-wrap"><table class="hm-tbl"><thead><tr><th>Especialista</th><th>Abertura</th><th>R&S</th><th>Admissão</th><th>SST</th><th>Folha</th><th>Ponto</th><th>Benefícios</th><th>LMS</th><th>Talentos</th></tr></thead><tbody id="hmBody"></tbody></table></div>
@@ -541,8 +594,7 @@ tbody td.c{text-align:center;}
       <div class="mf2"><label>Avaliador</label><input type="text" id="mf-ev" placeholder="Nome do avaliador"></div>
     </div>
     <div class="ms-section"><div class="ms-stitle">Bloco 1 — Presença Física</div><div class="ms-sgrid"><div class="ms-si"><label>Postura</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-postura"></div><div class="ms-si"><label>Contato Visual</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-contato"></div><div class="ms-si"><label>Energia</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-energia"></div></div></div>
-    <div class="ms-section"><div class="ms-stitle">Bloco 2 — Fala & Persuasão</div><div class="ms-sgrid"><div class="ms-si"><label>Clareza</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-clareza"></div><div class="ms-si"><label>Storytelling</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-story"></div><div class="ms-si"><label>Power Qs</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-pq"></div></div></div>
-    <div class="ms-section"><div class="ms-stitle">Bloco 3 — Módulos (média por módulo)</div><div class="ms-sgrid"><div class="ms-si"><label>Abertura</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m0"></div><div class="ms-si"><label>R&S</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m1"></div><div class="ms-si"><label>Admissão</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m2"></div><div class="ms-si"><label>SST</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m3"></div><div class="ms-si"><label>Folha</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m4"></div><div class="ms-si"><label>Ponto</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m5"></div><div class="ms-si"><label>Benefícios</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m6"></div><div class="ms-si"><label>LMS</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m7"></div><div class="ms-si"><label>Talentos</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m8"></div></div></div>
+    <div class="ms-section"><div class="ms-stitle">Módulos (média por módulo)</div><div class="ms-sgrid"><div class="ms-si"><label>Abertura</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m0"></div><div class="ms-si"><label>R&S</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m1"></div><div class="ms-si"><label>Admissão</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m2"></div><div class="ms-si"><label>SST</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m3"></div><div class="ms-si"><label>Folha</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m4"></div><div class="ms-si"><label>Ponto</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m5"></div><div class="ms-si"><label>Benefícios</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m6"></div><div class="ms-si"><label>LMS</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m7"></div><div class="ms-si"><label>Talentos</label><input type="number" min="1" max="5" step=".1" placeholder="1–5" id="mf-m8"></div></div></div>
     <div class="ms-section"><div class="ms-stitle">Bloco 4 — Visão Integrada</div><div class="ms-sgrid"><div class="ms-si"><label>Transições</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-trans"></div><div class="ms-si"><label>Narrativa</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-integ"></div><div class="ms-si"><label>Timing</label><input type="number" min="1" max="5" placeholder="1–5" id="mf-timing"></div></div></div>
     <div class="modal-grid">
       <div class="mf2 full"><label>Pontos Fortes</label><textarea rows="2" id="mf-str" placeholder="Pontos positivos..."></textarea></div>
@@ -573,7 +625,7 @@ tbody td.c{text-align:center;}
     <div style="background:var(--abg);border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:#7A4A00;line-height:1.5;">
       <b>Nota:</b> O PDF ficará arquivado e identificado no dashboard. Preencha também os campos de nota manualmente para que o arquivo seja contabilizado nas análises.
     </div>
-    <div class="ms-section"><div class="ms-stitle">Notas por Bloco (extraídas do PDF)</div><div class="ms-sgrid"><div class="ms-si"><label>Presença (média)</label><input type="number" min="1" max="5" step=".1" id="pdf-b1"></div><div class="ms-si"><label>Fala & Pers. (média)</label><input type="number" min="1" max="5" step=".1" id="pdf-b2"></div><div class="ms-si"><label>Módulos (média)</label><input type="number" min="1" max="5" step=".1" id="pdf-mods"></div><div class="ms-si"><label>Integração (média)</label><input type="number" min="1" max="5" step=".1" id="pdf-b4"></div></div></div>
+    <div class="ms-section"><div class="ms-stitle">Notas por Bloco (extraídas do PDF)</div><div class="ms-sgrid"><div class="ms-si"><label>Módulos (média)</label><input type="number" min="1" max="5" step=".1" id="pdf-mods"></div><div class="ms-si"><label>Integração (média)</label><input type="number" min="1" max="5" step=".1" id="pdf-b4"></div></div></div>
     <div class="modal-grid">
       <div class="mf2 full"><label>Pontos Fortes (extraídos do PDF)</label><textarea rows="2" id="pdf-str" placeholder="Transcreva os pontos fortes anotados..."></textarea></div>
       <div class="mf2 full"><label>Pontos a Melhorar (extraídos do PDF)</label><textarea rows="2" id="pdf-imp" placeholder="Transcreva os pontos a melhorar anotados..."></textarea></div>
@@ -670,13 +722,11 @@ function avgVals(vals) {
 }
 function fmt(v,d=1){ return v!==null&&v!==undefined ? Number(v).toFixed(d) : '—'; }
 
-function calcBloco1(){ return avgVals([getStars('postura'),getStars('contato'),getStars('energia')]); }
-function calcBloco2(){ return avgVals([getStars('clareza'),getStars('story'),getStars('pq')]); }
 function calcModAvg(i){ return avgVals([getStars(`m${i}a`),getStars(`m${i}b`),getStars(`m${i}c`)]); }
 function calcBloco4(){ return avgVals([getStars('trans'),getStars('integ'),getStars('timing')]); }
-function calcFinal(b1,b2,m,b4){
+function calcFinal(m,b4){
   let s=0,w=0;
-  if(b1){s+=b1*1;w+=1;} if(b2){s+=b2*2;w+=2;} if(m){s+=m*1.5;w+=1.5;} if(b4){s+=b4*1.5;w+=1.5;}
+  if(m){s+=m*2;w+=2;} if(b4){s+=b4*1;w+=1;}
   return w>0?s/w:null;
 }
 
@@ -688,39 +738,44 @@ function updateModuleScores(){
   }
 }
 function updateScoreSummary(){
-  const b1=calcBloco1(),b2=calcBloco2(),b4=calcBloco4();
+  const b4=calcBloco4();
   const mAvgs=[0,1,2,3,4,5,6,7,8].map(i=>calcModAvg(i));
   const m=avgVals(mAvgs);
-  const fs=calcFinal(b1,b2,m,b4);
-  document.getElementById('sv-b1').textContent=fmt(b1);
-  document.getElementById('sv-b2').textContent=fmt(b2);
+  const fs=calcFinal(m,b4);
   document.getElementById('sv-mods').textContent=fmt(m);
-  document.getElementById('sv-b4').textContent=fmt(b4);
+  document.getElementById('sv-final').textContent=fmt(fs);
   document.getElementById('sf-val').textContent=fmt(fs);
   document.getElementById('prog-fill').style.width=(fs?fs/5*100:0)+'%';
   const concepts=['','Requer atenção urgente','Em desenvolvimento','Atende o esperado','Pronto para o campo','Referência de mercado ⭐'];
   document.getElementById('sf-concept').textContent=fs?concepts[Math.round(fs)]||'':'';
 }
 
-function clearSC(){
+function resetScorecard(){
   document.querySelectorAll('#scScreen .star').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('#scScreen .slabel').forEach(l=>l.textContent='—');
   document.querySelectorAll('#scScreen textarea').forEach(t=>t.value='');
+  document.querySelectorAll('#scScreen .mod-body').forEach(b=>b.classList.remove('open'));
+  document.querySelectorAll('#scScreen .mod-tog').forEach(t=>t.classList.remove('open'));
   for(let i=0;i<9;i++){const el=document.getElementById(`msp-${i}`);if(el)el.textContent='—';}
-  document.getElementById('sv-b1').textContent='—';document.getElementById('sv-b2').textContent='—';
-  document.getElementById('sv-mods').textContent='—';document.getElementById('sv-b4').textContent='—';
-  document.getElementById('sf-val').textContent='—';document.getElementById('prog-fill').style.width='0%';
+  document.getElementById('sv-mods').textContent='—';
+  document.getElementById('sv-final').textContent='—';
+  document.getElementById('sf-val').textContent='—';
+  document.getElementById('prog-fill').style.width='0%';
   document.getElementById('sf-concept').textContent='';
-  document.getElementById('saveOk').style.display='none';
   document.getElementById('saveBtn').disabled=false;
+  document.getElementById('sc-date').value=new Date().toISOString().split('T')[0];
+}
+
+function clearSC(){
+  resetScorecard();
 }
 
 // ═══ SAVE EVALUATION ═══
 function saveEvaluation(){
-  const b1=calcBloco1(),b2=calcBloco2(),b4=calcBloco4();
   const mods=[0,1,2,3,4,5,6,7,8].map(i=>calcModAvg(i));
   const m=avgVals(mods);
-  const fs=calcFinal(b1,b2,m,b4);
+  const b4=calcBloco4();
+  const fs=calcFinal(m,b4);
   if(!fs){ showToast('Preencha ao menos alguns critérios antes de enviar.','red'); return; }
   const entry={
     id: Date.now(),
@@ -728,17 +783,30 @@ function saveEvaluation(){
     specialist: currentSpecialist,
     evaluator: currentEvaluator,
     date: document.getElementById('sc-date').value,
-    bloco1:{postura:getStars('postura'),contato:getStars('contato'),energia:getStars('energia')},
-    bloco2:{clareza:getStars('clareza'),story:getStars('story'),pq:getStars('pq')},
     modulos: mods,
     bloco4:{trans:getStars('trans'),integ:getStars('integ'),timing:getStars('timing')},
     strengths: document.getElementById('sc-strengths').value.trim(),
     improvements: document.getElementById('sc-improvements').value.trim()
   };
   const data=loadData(); data.push(entry); saveData(data);
-  document.getElementById('saveOk').style.display='block';
-  document.getElementById('saveBtn').disabled=true;
-  showToast('Avaliação enviada com sucesso!','green');
+  // Show next-eval overlay
+  document.getElementById('nextSpecialist').value = '';
+  document.getElementById('nextErr').style.display = 'none';
+  const ov = document.getElementById('nextOverlay');
+  ov.style.display = 'flex';
+  // Scroll to top so overlay is fully visible
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function startNextEval(){
+  const sel = document.getElementById('nextSpecialist').value;
+  if(!sel){ document.getElementById('nextErr').style.display='block'; return; }
+  document.getElementById('nextErr').style.display='none';
+  document.getElementById('nextOverlay').style.display='none';
+  currentSpecialist = sel;
+  document.getElementById('sc-specialist').value = sel;
+  resetScorecard();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // ═══ ADMIN RENDER ═══
@@ -754,19 +822,16 @@ function hmClass(v){
   if(v>=2.5) return 'hm3'; if(v>=1.5) return 'hm2';
   return 'hm1';
 }
-function entryB1(d){ return avgVals([d.bloco1?.postura,d.bloco1?.contato,d.bloco1?.energia]); }
-function entryB2(d){ return avgVals([d.bloco2?.clareza,d.bloco2?.story,d.bloco2?.pq]); }
 function entryMods(d){ return avgVals(d.modulos||[]); }
 function entryB4(d){ return avgVals([d.bloco4?.trans,d.bloco4?.integ,d.bloco4?.timing]); }
 function entryFS(d){
-  const b1=entryB1(d),b2=entryB2(d),m=entryMods(d),b4=entryB4(d);
-  // PDF entries store block avgs directly
-  if(d.source==='pdf'){ return calcFinalRaw(d.b1avg,d.b2avg,d.modsavg,d.b4avg); }
-  return calcFinal(b1,b2,m,b4);
+  const m=entryMods(d),b4=entryB4(d);
+  if(d.source==='pdf'){ return calcFinalRaw(d.modsavg,d.b4avg); }
+  return calcFinalRaw(m,b4);
 }
-function calcFinalRaw(b1,b2,m,b4){
+function calcFinalRaw(m,b4){
   let s=0,w=0;
-  if(b1){s+=b1*1;w+=1;} if(b2){s+=b2*2;w+=2;} if(m){s+=m*1.5;w+=1.5;} if(b4){s+=b4*1.5;w+=1.5;}
+  if(m){s+=m*2;w+=2;} if(b4){s+=b4*1;w+=1;}
   return w>0?s/w:null;
 }
 function statusLabel(v){
@@ -824,32 +889,27 @@ function renderKPIs(data,all){
 
 function renderMainTable(data){
   const tbody=document.getElementById('mainTbody');
-  if(!data.length){tbody.innerHTML='<tr><td colspan="10" class="empty">Nenhuma avaliação registrada.</td></tr>';return;}
+  if(!data.length){tbody.innerHTML='<tr><td colspan="8" class="empty">Nenhuma avaliação registrada.</td></tr>';return;}
   tbody.innerHTML=data.map((d,i)=>{
-    let b1,b2,m,b4,fs;
-    if(d.source==='pdf'){b1=d.b1avg;b2=d.b2avg;m=d.modsavg;b4=d.b4avg;fs=calcFinalRaw(b1,b2,m,b4);}
-    else{b1=entryB1(d);b2=entryB2(d);m=entryMods(d);b4=entryB4(d);fs=calcFinal(b1,b2,m,b4);}
+    let m,b4,fs;
+    if(d.source==='pdf'){m=d.modsavg;b4=d.b4avg;fs=calcFinalRaw(m,b4);}
+    else{m=entryMods(d);b4=entryB4(d);fs=calcFinalRaw(m,b4);}
     return `
     <tr>
       <td><div class="sp-name">${d.specialist}</div></td>
       <td><span class="ev-tag">${d.evaluator}</span></td>
       <td>${srcBadge(d.source)}</td>
-      <td class="c"><span class="pill ${pillClass(b1)}">${fmt(b1)}</span></td>
-      <td class="c"><span class="pill ${pillClass(b2)}">${fmt(b2)}</span></td>
       <td class="c"><span class="pill ${pillClass(m)}">${fmt(m)}</span></td>
       <td class="c"><span class="pill ${pillClass(b4)}">${fmt(b4)}</span></td>
       <td class="c"><span class="pill fs ${pillClass(fs)}">${fmt(fs)}</span></td>
       <td class="c">${d.source!=='pdf'?`<button class="det-btn" onclick="togDet(${i})">▾ Ver</button>`:''}</td>
       <td class="c"><button class="del-btn" onclick="delEntry(${d.id})">✕</button></td>
     </tr>
-    ${d.source!=='pdf'?`<tr class="det-row" id="det-${i}"><td colspan="10" class="det-cell"><div class="det-inner">
+    ${d.source!=='pdf'?`<tr class="det-row" id="det-${i}"><td colspan="8" class="det-cell"><div class="det-inner">
       <div style="font-size:12px;font-weight:700;color:var(--deep-navy);margin-bottom:11px;">${d.specialist} · Avaliador: ${d.evaluator}</div>
-      <div class="det-grid">
-        <div class="det-blk"><div class="det-blk-title">Presença Física</div>${[['Postura',d.bloco1?.postura],['Contato',d.bloco1?.contato],['Energia',d.bloco1?.energia]].map(([l,v])=>`<div class="ev-row"><span class="ev-nm">${l}</span><span class="pill ${pillClass(v)}">${fmt(v)}</span></div>`).join('')}</div>
-        <div class="det-blk"><div class="det-blk-title">Fala & Persuasão</div>${[['Clareza',d.bloco2?.clareza],['Story',d.bloco2?.story],['P.Qs',d.bloco2?.pq]].map(([l,v])=>`<div class="ev-row"><span class="ev-nm">${l}</span><span class="pill ${pillClass(v)}">${fmt(v)}</span></div>`).join('')}</div>
-        <div class="det-blk" style="grid-column:span 2;"><div class="det-blk-title">Módulos da Jornada</div><div class="ms-grid">${['Abertura','R&S','Admissão','SST','Folha','Ponto','Benef.','LMS','Talentos'].map((l,mi)=>`<div class="ms-item"><div class="ms-lbl">${l}</div><div class="ms-val ${pillClass(d.modulos?.[mi])}" style="font-size:15px">${fmt(d.modulos?.[mi])}</div><div class="ms-bar"><div class="ms-fill" style="width:${((d.modulos?.[mi]||0)/5*100)}%"></div></div></div>`).join('')}</div></div>
-      </div>
-      ${(d.strengths||d.improvements)?`<div class="fb-pair">${d.strengths?`<div class="fb-str"><div class="fb-str-t">✓ Pontos Fortes</div><div class="fb-str-c">${d.strengths}</div></div>`:''} ${d.improvements?`<div class="fb-imp"><div class="fb-imp-t">↑ Pontos a Melhorar</div><div class="fb-imp-c">${d.improvements}</div></div>`:''}</div>`:''}
+      <div class="det-blk" style="margin-bottom:12px;"><div class="det-blk-title">Módulos da Jornada</div><div class="ms-grid">${['Abertura','R&S','Admissão','SST','Folha','Ponto','Benef.','LMS','Talentos'].map((l,mi)=>`<div class="ms-item"><div class="ms-lbl">${l}</div><div class="ms-val ${pillClass(d.modulos?.[mi])}" style="font-size:15px">${fmt(d.modulos?.[mi])}</div><div class="ms-bar"><div class="ms-fill" style="width:${((d.modulos?.[mi]||0)/5*100)}%"></div></div></div>`).join('')}</div></div>
+      <div class="det-blk"><div class="det-blk-title">Visão Integrada</div>${[['Transições',d.bloco4?.trans],['Narrativa',d.bloco4?.integ],['Timing',d.bloco4?.timing]].map(([l,v])=>`<div class="ev-row"><span class="ev-nm">${l}</span><span class="pill ${pillClass(v)}">${fmt(v)}</span></div>`).join('')}</div>
+      ${(d.strengths||d.improvements)?`<div class="fb-pair" style="margin-top:12px;">${d.strengths?`<div class="fb-str"><div class="fb-str-t">✓ Pontos Fortes</div><div class="fb-str-c">${d.strengths}</div></div>`:''} ${d.improvements?`<div class="fb-imp"><div class="fb-imp-t">↑ Pontos a Melhorar</div><div class="fb-imp-c">${d.improvements}</div></div>`:''}</div>`:''}
     </div></td></tr>`:''}`;
   }).join('');
 }
@@ -872,18 +932,13 @@ function renderAvgTable(data){
   document.getElementById('avgTbody').innerHTML=specs.map(sp=>{
     const sd=data.filter(d=>d.specialist===sp);
     const avgOf=fn=>{const v=sd.map(fn).filter(Boolean);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null;};
-    let b1,b2,m,b4;
-    b1=avgOf(d=>d.source==='pdf'?d.b1avg:entryB1(d));
-    b2=avgOf(d=>d.source==='pdf'?d.b2avg:entryB2(d));
-    m=avgOf(d=>d.source==='pdf'?d.modsavg:entryMods(d));
-    b4=avgOf(d=>d.source==='pdf'?d.b4avg:entryB4(d));
-    const fs=calcFinalRaw(b1,b2,m,b4);
+    const m=avgOf(d=>d.source==='pdf'?d.modsavg:entryMods(d));
+    const b4=avgOf(d=>d.source==='pdf'?d.b4avg:entryB4(d));
+    const fs=calcFinalRaw(m,b4);
     const sl=statusLabel(fs);
     return `<tr>
       <td><div class="sp-name">${sp}</div><div style="font-size:11px;color:var(--muted)">${sd.length} avaliação(ões)</div></td>
       <td class="c"><b>${sd.length}</b></td>
-      <td class="c"><span class="pill ${pillClass(b1)}">${fmt(b1)}</span></td>
-      <td class="c"><span class="pill ${pillClass(b2)}">${fmt(b2)}</span></td>
       <td class="c"><span class="pill ${pillClass(m)}">${fmt(m)}</span></td>
       <td class="c"><span class="pill ${pillClass(b4)}">${fmt(b4)}</span></td>
       <td class="c"><span class="pill fs ${pillClass(fs)}">${fmt(fs)}</span></td>
@@ -933,8 +988,6 @@ function saveManual(){
   if(!sp||!ev){alert('Informe o especialista e o avaliador.');return;}
   const entry={
     id:Date.now(), source:'manual', specialist:sp, evaluator:ev, date:new Date().toISOString().split('T')[0],
-    bloco1:{postura:gv('mf-postura'),contato:gv('mf-contato'),energia:gv('mf-energia')},
-    bloco2:{clareza:gv('mf-clareza'),story:gv('mf-story'),pq:gv('mf-pq')},
     modulos:[0,1,2,3,4,5,6,7,8].map(i=>gv(`mf-m${i}`)),
     bloco4:{trans:gv('mf-trans'),integ:gv('mf-integ'),timing:gv('mf-timing')},
     strengths:document.getElementById('mf-str').value.trim(),
@@ -953,7 +1006,7 @@ function savePdf(){
   if(!sp||!ev){alert('Informe o especialista e o avaliador.');return;}
   const entry={
     id:Date.now(), source:'pdf', specialist:sp, evaluator:ev, date:new Date().toISOString().split('T')[0],
-    b1avg:gv('pdf-b1'), b2avg:gv('pdf-b2'), modsavg:gv('pdf-mods'), b4avg:gv('pdf-b4'),
+    modsavg:gv('pdf-mods'), b4avg:gv('pdf-b4'),
     modulos:[], bloco1:{}, bloco2:{}, bloco4:{},
     strengths:document.getElementById('pdf-str').value.trim(),
     improvements:document.getElementById('pdf-imp').value.trim(),
