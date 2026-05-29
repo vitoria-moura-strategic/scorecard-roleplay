@@ -47,6 +47,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Work Sans',sans-serif;background:var(--bg);color:var(--body);min-height:100vh;}
+/* iOS: prevent auto-zoom on input focus (requires font-size >= 16px on mobile) */
+input,select,textarea{font-size:16px;}
+/* Better tap targets on touch */
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+a{-webkit-tap-highlight-color:transparent;}
 
 /* ═══ SCREENS ═══ */
 .screen{display:none;}
@@ -321,6 +326,119 @@ tbody td.c{text-align:center;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.green{background:linear-gradient(135deg,var(--gd),var(--green));}
 .toast.red{background:var(--red);}
+
+/* ═══ RESPONSIVE — TABLET & MOBILE ═══ */
+@media (max-width: 768px) {
+
+  /* Landing */
+  .land-cards{flex-direction:column;width:100%;padding:0 24px;}
+  .land-card{width:100%;}
+  .land-logo{font-size:26px;}
+
+  /* Login box */
+  .login-box{width:calc(100vw - 32px);padding:32px 24px;}
+
+  /* Header */
+  .hdr-inner{padding:14px 16px;}
+  .hdr-name{font-size:16px;}
+  .hdr-badge{display:none;}
+
+  /* Scorecard meta */
+  .sc-meta{grid-template-columns:1fr;padding:12px 16px;gap:10px;}
+
+  /* Scorecard content */
+  .sc-content{padding:16px;}
+
+  /* Scale bar */
+  .scale-bar{gap:10px;padding:10px 12px;}
+  .sc-text{font-size:9px;}
+
+  /* Criteria grid — 1 column */
+  .crit-grid{grid-template-columns:1fr;}
+
+  /* Module criteria grid — 1 column */
+  .mod-crit-grid{grid-template-columns:1fr;}
+
+  /* Module header */
+  .mod-sp{font-size:16px;padding:0 10px;}
+  .mod-name{font-size:12px;}
+  .mod-time{font-size:10px;}
+  .mod-body{padding:12px 12px 14px;}
+
+  /* Stars — larger tap targets */
+  .star{width:34px;height:34px;font-size:14px;}
+
+  /* Summary box */
+  .sum-box{padding:18px 16px;}
+  .sum-grid{grid-template-columns:1fr 1fr;}
+  .sum-final-row{flex-direction:column;align-items:flex-start;gap:14px;}
+  .sum-big{font-size:36px;}
+  .prog-wrap{width:100%;}
+  .fn-notes-pair{grid-template-columns:1fr;}
+
+  /* Actions */
+  .sc-actions{flex-direction:column;}
+  .btn{width:100%;text-align:center;}
+
+  /* Toolbar */
+  .toolbar{padding:10px 12px;gap:8px;}
+  .tb-title{font-size:11px;}
+  .tb-sep{display:none;}
+  .adm-btn{padding:6px 12px;font-size:11px;}
+
+  /* Admin main */
+  .adm-main{padding:14px 12px;}
+
+  /* KPI strip — 2 columns */
+  .kpi-strip{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .kpi-val{font-size:24px;}
+
+  /* Tables — scrollable */
+  .tw{overflow-x:auto;}
+  table{min-width:500px;}
+  thead th,tbody td{padding:8px 10px;font-size:11px;}
+
+  /* Heatmap */
+  .hm-wrap{overflow-x:auto;}
+  .hm-tbl{min-width:600px;}
+  .hm-tbl thead th,.hm-tbl tbody td{padding:7px 8px;font-size:10px;}
+
+  /* Insights */
+  .ins-grid{grid-template-columns:1fr;}
+
+  /* Modals */
+  .modal{width:calc(100vw - 24px);padding:20px 16px;max-height:85vh;}
+  .modal-grid{grid-template-columns:1fr;}
+  .ms-sgrid{grid-template-columns:repeat(3,1fr);}
+  .modal-acts{flex-direction:column-reverse;}
+  .m-cancel,.m-save{width:100%;text-align:center;}
+
+  /* Next eval overlay */
+  #nextOverlay > div{width:calc(100vw - 32px);padding:28px 20px;}
+
+  /* Detail row */
+  .det-inner{padding:12px;}
+  .ms-grid{grid-template-columns:repeat(3,1fr);}
+  .fb-pair{grid-template-columns:1fr;}
+
+  /* Footer */
+  .footer{font-size:9px;padding:14px 12px;}
+}
+
+@media (max-width: 400px) {
+  .kpi-strip{grid-template-columns:1fr;}
+  .ms-sgrid{grid-template-columns:repeat(2,1fr);}
+  .sum-grid{grid-template-columns:1fr;}
+  .star{width:32px;height:32px;}
+}
+
+/* Touch — disable hover effects on mobile */
+@media (hover: none) {
+  .star:hover{background:#fff;border-color:var(--bdr);color:var(--muted);}
+  .star.on:hover{background:var(--green);border-color:var(--green);color:#fff;}
+  .land-card:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);transform:none;}
+  .crit-card:hover{box-shadow:none;}
+}
 </style>
 </head>
 <body>
@@ -639,7 +757,7 @@ tbody td.c{text-align:center;}
 // SUPABASE — cole suas credenciais nas duas linhas abaixo
 // ═══════════════════════════════════════════════════════
 const SUPABASE_URL  = 'https://yejkmjedtiirgvldxtna.supabase.co';
-const SUPABASE_KEY  = 'sb_secret_75_gHMEFAjgPFRdAPlj03A_TuZg33B3';
+const SUPABASE_KEY  = 'sb_publishable_Xhf1G5n1C99yu4YCIm9_6w_NGu6eRQE';
 // ═══════════════════════════════════════════════════════
 
 const ADM_USER = 'admin';
