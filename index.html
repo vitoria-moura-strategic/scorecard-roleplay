@@ -754,73 +754,109 @@ tbody td.c{text-align:center;}
 
 <script>
 // ═══════════════════════════════════════════════════════
-// SUPABASE — cole suas credenciais nas duas linhas abaixo
+// SUPABASE — credenciais
 // ═══════════════════════════════════════════════════════
-const SUPABASE_URL  = 'https://yejkmjedtiirgvldxtna.supabase.co';
-const SUPABASE_KEY  = 'sb_publishable_Xhf1G5n1C99yu4YCIm9_6w_NGu6eRQE';
+const SUPABASE_URL = 'https://yejkmjedtiirgvldxtna.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Xhf1G5n1C99yu4YCIm9_6w_NGu6eRQE';
 // ═══════════════════════════════════════════════════════
 
 const ADM_USER = 'admin';
 const ADM_PASS = 'sankhya2025';
 
-// ── helpers ──
-const sbHeaders = {
-  'Content-Type':  'application/json',
-  'apikey':        SUPABASE_KEY,
-  'Authorization': 'Bearer ' + SUPABASE_KEY,
-  'Prefer':        'return=representation'
-};
+// ── Supabase fetch helper ──
+async function sbFetch(path, options = {}) {
+  const url = `${SUPABASE_URL}/rest/v1/${path}`;
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      'Content-Type':  'application/json',
+      'apikey':        SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Prefer':        options.prefer || '',
+      ...(options.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Supabase ${res.status}: ${body}`);
+  }
+  // 204 No Content (DELETE) — return null
+  if (res.status === 204) return null;
+  return res.json();
+}
 
 async function loadData() {
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/evaluations?order=created_at.asc`, {
-      headers: { ...sbHeaders, 'Prefer': '' }
+    const rows = await sbFetch('evaluations?order=created_at.asc');
+    return (rows || []).map(r => {
+      // --- normalise modulos ---
+      // Supabase jsonb can return: array, object {0:v,1:v,...}, or null
+      let modulos = r.modulos;
+      if (!modulos) {
+        modulos = [];
+      } else if (!Array.isArray(modulos)) {
+        // object with numeric keys → sort by key to preserve order
+        modulos = Object.keys(modulos)
+          .sort((a,b) => Number(a) - Number(b))
+          .map(k => {
+            const v = parseFloat(modulos[k]);
+            return isNaN(v) ? null : v;
+          });
+      } else {
+        modulos = modulos.map(v => {
+          const n = parseFloat(v);
+          return isNaN(n) ? null : n;
+        });
+      }
+
+      // --- normalise bloco4 ---
+      let bloco4 = r.bloco4 || {};
+      // ensure values are numbers or null
+      const b4norm = {};
+      ['trans','integ','timing'].forEach(k => {
+        const v = parseFloat(bloco4[k]);
+        b4norm[k] = isNaN(v) ? null : v;
+      });
+
+      return { ...r, modulos, bloco4: b4norm };
     });
-    if (!res.ok) throw new Error(await res.text());
-    const rows = await res.json();
-    // normalise: modulos e bloco4 chegam como objetos JSON do postgres
-    return rows.map(r => ({
-      ...r,
-      modulos: Array.isArray(r.modulos) ? r.modulos : Object.values(r.modulos || {}),
-      bloco4:  r.bloco4  || {}
-    }));
-  } catch(e) {
+  } catch (e) {
     console.error('loadData:', e);
-    showToast('Erro ao carregar dados. Verifique as credenciais.', 'red');
+    showToast('Erro ao carregar dados: ' + e.message, 'red');
     return [];
   }
 }
 
 async function saveData(entry) {
-  // serialise arrays/objects for jsonb columns
+  // calculate averages here so they're always present
+  const modsAvg  = avgVals((entry.modulos || []).filter(v => v !== null));
+  const b4Arr    = [entry.bloco4?.trans, entry.bloco4?.integ, entry.bloco4?.timing];
+  const b4Avg    = avgVals(b4Arr);
+
+  // jsonb columns: pass objects/arrays directly — do NOT JSON.stringify
   const payload = {
-    source:       entry.source,
-    specialist:   entry.specialist,
-    evaluator:    entry.evaluator,
-    date:         entry.date,
-    modulos:      JSON.stringify(entry.modulos  || []),
-    bloco4:       JSON.stringify(entry.bloco4   || {}),
-    modsavg:      entry.modsavg  ?? null,
-    b4avg:        entry.b4avg    ?? null,
+    source:       entry.source       || 'evaluator',
+    specialist:   entry.specialist   || '',
+    evaluator:    entry.evaluator    || '',
+    date:         entry.date         || new Date().toISOString().split('T')[0],
+    modulos:      entry.modulos      || [],
+    bloco4:       entry.bloco4       || {},
+    modsavg:      entry.modsavg      ?? modsAvg  ?? null,
+    b4avg:        entry.b4avg        ?? b4Avg    ?? null,
     strengths:    entry.strengths    || null,
     improvements: entry.improvements || null,
     pdf_name:     entry.pdf_name     || null
   };
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/evaluations`, {
+
+  return sbFetch('evaluations', {
     method:  'POST',
-    headers: sbHeaders,
+    prefer:  'return=representation',
     body:    JSON.stringify(payload)
   });
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
 }
 
 async function deleteData(id) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/evaluations?id=eq.${id}`, {
-    method:  'DELETE',
-    headers: { ...sbHeaders, 'Prefer': '' }
-  });
-  if (!res.ok) throw new Error(await res.text());
+  return sbFetch(`evaluations?id=eq.${id}`, { method: 'DELETE' });
 }
 
 // ═══ NAVIGATION ═══
@@ -894,12 +930,6 @@ function getStars(id) {
   const on = g.querySelectorAll('.star.on').length;
   return on > 0 ? on : null;
 }
-function avgVals(vals) {
-  const v = vals.filter(x => x !== null);
-  return v.length ? v.reduce((a,b)=>a+b,0)/v.length : null;
-}
-function fmt(v,d=1){ return v!==null&&v!==undefined ? Number(v).toFixed(d) : '—'; }
-
 function calcModAvg(i){ return avgVals([getStars(`m${i}a`),getStars(`m${i}b`),getStars(`m${i}c`)]); }
 function calcBloco4(){ return avgVals([getStars('trans'),getStars('integ'),getStars('timing')]); }
 function calcFinal(m,b4){
@@ -1009,8 +1039,20 @@ function hmClass(v){
   if(v>=2.5) return 'hm3'; if(v>=1.5) return 'hm2';
   return 'hm1';
 }
-function entryMods(d){ return avgVals(d.modulos||[]); }
-function entryB4(d){ return avgVals([d.bloco4?.trans,d.bloco4?.integ,d.bloco4?.timing]); }
+function avgVals(vals) {
+  const v = (vals || []).filter(x => x !== null && x !== undefined && !isNaN(x) && typeof x === 'number');
+  return v.length ? v.reduce((a,b) => a+b, 0) / v.length : null;
+}
+function fmt(v,d=1){ return (v !== null && v !== undefined && !isNaN(v)) ? Number(v).toFixed(d) : '—'; }
+
+function entryMods(d){
+  if (!d.modulos || !Array.isArray(d.modulos)) return null;
+  return avgVals(d.modulos);
+}
+function entryB4(d){
+  if (!d.bloco4) return null;
+  return avgVals([d.bloco4.trans, d.bloco4.integ, d.bloco4.timing]);
+}
 function entryFS(d){
   const m=entryMods(d),b4=entryB4(d);
   if(d.source==='pdf'){ return calcFinalRaw(d.modsavg,d.b4avg); }
@@ -1145,10 +1187,16 @@ function renderAvgTable(data){
 function renderHeatmap(data){
   const specs=[...new Set(data.map(d=>d.specialist))];
   document.getElementById('hmBody').innerHTML=specs.map(sp=>{
-    const sd=data.filter(d=>d.specialist===sp&&d.source!=='pdf');
+    const sd=data.filter(d=>d.specialist===sp && d.source!=='pdf');
     const modAvgs=[0,1,2,3,4,5,6,7,8].map(mi=>{
-      const vals=sd.map(d=>d.modulos?.[mi]).filter(v=>v!==null&&v!==undefined);
-      return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:null;
+      const vals=sd
+        .map(d => {
+          if (!Array.isArray(d.modulos)) return null;
+          const v = parseFloat(d.modulos[mi]);
+          return isNaN(v) ? null : v;
+        })
+        .filter(v => v !== null && v >= 0 && v <= 5);
+      return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
     });
     return `<tr><td>${sp}</td>${modAvgs.map(v=>`<td class="${hmClass(v)}">${fmt(v)}</td>`).join('')}</tr>`;
   }).join('');
